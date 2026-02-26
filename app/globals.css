@@ -453,11 +453,12 @@ mux-player {
 
 .send-button {
   margin-top: 22px;
+  margin-left: 6px;
   border: 0;
   background: transparent;
   color: inherit;
   font: inherit;
-  font-size: clamp(20px, 1.8vw, 30px);
+  font-size: clamp(17px, 1.5vw, 25px);
   line-height: 1.1;
   padding: 0;
   cursor: pointer;
