@@ -457,10 +457,37 @@ mux-player {
   background: transparent;
   color: inherit;
   font: inherit;
-  font-size: clamp(28px, 2.6vw, 42px);
+  font-size: clamp(20px, 1.8vw, 30px);
   line-height: 1.1;
   padding: 0;
   cursor: pointer;
+}
+
+.send-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.form-status {
+  margin: 10px 0 0;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.form-status.is-success {
+  color: #2f7a46;
+}
+
+.form-status.is-error {
+  color: #b53a3a;
+}
+
+.app[data-mode="dark"] .form-status.is-success {
+  color: #79d09c;
+}
+
+.app[data-mode="dark"] .form-status.is-error {
+  color: #ff8f8f;
 }
 
 .theme-dot {

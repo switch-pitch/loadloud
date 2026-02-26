@@ -48,7 +48,7 @@ export default function Page() {
   const controlsRef = useRef(null);
   const hideTimerRef = useRef(null);
 
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState("dark");
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasEnded, setHasEnded] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -61,6 +61,7 @@ export default function Page() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isLandscapeMobile, setIsLandscapeMobile] = useState(false);
   const [frameStyle, setFrameStyle] = useState({});
+  const [formState, setFormState] = useState({ status: "idle", message: "" });
 
   const currentVideo = useMemo(() => VIDEO_ITEMS[currentVideoIndex], [currentVideoIndex]);
   const phoneVisible = currentTime >= 151 && !hasEnded;
@@ -131,7 +132,7 @@ export default function Page() {
 
   useEffect(() => {
     const saved = window.localStorage.getItem("project3-theme");
-    if (saved === "dark") setMode("dark");
+    if (saved === "light" || saved === "dark") setMode(saved);
   }, []);
 
   useEffect(() => {
@@ -282,6 +283,43 @@ export default function Page() {
     setCurrentVideoIndex((prev) => (prev + step + VIDEO_ITEMS.length) % VIDEO_ITEMS.length);
   };
 
+  const handleContactSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setFormState({ status: "submitting", message: "Отправляем..." });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data?.error || "Не удалось отправить форму");
+      }
+
+      if (data?.mode === "email") {
+        setFormState({ status: "success", message: "Спасибо! Заявка отправлена на почту." });
+      } else {
+        setFormState({
+          status: "success",
+          message: "Форма принята (режим заглушки). Завтра подключим боевую почту."
+        });
+      }
+
+      form.reset();
+    } catch (error) {
+      setFormState({
+        status: "error",
+        message: error instanceof Error ? error.message : "Ошибка отправки. Попробуйте снова."
+      });
+    }
+  };
+
   const frameClasses = [
     "frame",
     isLandscapeMobile && !pseudoFullscreen ? "landscape-mobile" : "",
@@ -385,7 +423,7 @@ export default function Page() {
 
           <h2 className="contact-title">расскажите нам о вашей задаче</h2>
 
-          <form className="contact-form">
+          <form className="contact-form" onSubmit={handleContactSubmit}>
             <div className="form-grid">
               <label className="field">
                 <span>Имя*</span>
@@ -419,13 +457,19 @@ export default function Page() {
             </label>
 
             <label className="consent">
-              <input type="checkbox" required />
+              <input type="checkbox" name="consent" required />
               <span>Я согласен с правилами обработки персональных данных</span>
             </label>
 
-            <button className="send-button" type="submit">
-              Отправить →
+            <button className="send-button" type="submit" disabled={formState.status === "submitting"}>
+              {formState.status === "submitting" ? "Отправка..." : "Отправить →"}
             </button>
+
+            {formState.message ? (
+              <p className={`form-status ${formState.status === "error" ? "is-error" : "is-success"}`}>
+                {formState.message}
+              </p>
+            ) : null}
           </form>
         </div>
       </section>
@@ -433,7 +477,7 @@ export default function Page() {
       <button
         className="theme-dot ignore-hide-ui"
         type="button"
-        aria-label="Toggle dark mode"
+        aria-label="Переключить тему"
         onClick={() => setMode((prev) => (prev === "dark" ? "light" : "dark"))}
       >
         <span className="dot" />
