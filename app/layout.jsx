@@ -1,5 +1,11 @@
 import Script from "next/script";
+import { Inter } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-inter"
+});
 
 export const metadata = {
   title: "loadloud",
@@ -12,7 +18,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/xxu7csb.css" />
       </head>
-      <body>
+      <body className={inter.variable}>
         {children}
         <Script src="https://unpkg.com/@mux/mux-player" strategy="afterInteractive" type="module" />
       </body>

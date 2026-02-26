@@ -295,17 +295,11 @@ export default function Page() {
   return (
     <div className={appClasses} data-mode={mode}>
       <section className="brand-block ignore-hide-ui" aria-label="Brand description">
-        <h1 className="brand-title">loadloud. хорошие идеи надо снимать!</h1>
-        <p className="brand-description">
-          продакшн полного цикла,
-          <br />
-          снимаем рекламу, клипы, фильмы
-          <br />и пишем креатив к ним сами.
-        </p>
+        <h1 className="brand-title">loadloud studio</h1>
       </section>
 
       <button className="ui-button top-right ignore-hide-ui" type="button" onClick={toggleInfo}>
-        {infoOpen ? "закрыть" : "связаться с нами"}
+        {infoOpen ? "закрыть" : "нажать здесь"}
       </button>
 
       <main className={frameClasses} style={frameStyle}>
@@ -381,35 +375,58 @@ export default function Page() {
 
       <section className="info-panel" hidden={!infoOpen}>
         <div className="info-content">
-          <p>
-            Project 3 Agency is a full-service agency that provides creative direction, brand design, strategy,
-            content creation, event planning, and production services. Built on the Program Language operating
-            system, it is the first company of Project 3, an initiative designed to expand creative resources for
-            both corporate and independent businesses.
+          <p className="contact-intro">
+            loadloud studio - продакшн полного цикла.
+            <br />
+            снимаем бренд-контент, клипы, фильмы и пишем креатив к ним сами.
+            <br />
+            не волнуйтесь, мы это очень любим!
           </p>
-          <p className="links">
-            <a href="https://www.instagram.com/project3.agency" target="_blank" rel="noreferrer">
-              Instagram
-            </a>
-            <br />
-            <a href="https://www.tiktok.com/@project3agency" target="_blank" rel="noreferrer">
-              TikTok
-            </a>
-            <br />
-            <a href="https://www.youtube.com/@project3agency" target="_blank" rel="noreferrer">
-              YouTube
-            </a>
-            <br />
-            <a href="https://x.com/project3agency" target="_blank" rel="noreferrer">
-              X
-            </a>
-            <br />
-            <a href="https://www.linkedin.com/company/project3agency/" target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            <br />
-            <a href="mailto:contact@project3.agency">Email</a>
-          </p>
+
+          <h2 className="contact-title">расскажите нам о вашей задаче</h2>
+
+          <form className="contact-form">
+            <div className="form-grid">
+              <label className="field">
+                <span>Имя*</span>
+                <input type="text" name="name" required />
+              </label>
+
+              <label className="field">
+                <span>Компания*</span>
+                <input type="text" name="company" required />
+              </label>
+
+              <label className="field">
+                <span>Телефон*</span>
+                <input type="tel" name="phone" required />
+              </label>
+
+              <label className="field">
+                <span>E-mail*</span>
+                <input type="email" name="email" required />
+              </label>
+            </div>
+
+            <label className="field field-file">
+              <span>Прикрепить файл</span>
+              <input type="file" name="file" />
+            </label>
+
+            <label className="field field-area">
+              <span>Описание задачи</span>
+              <textarea name="message" rows={4} />
+            </label>
+
+            <label className="consent">
+              <input type="checkbox" required />
+              <span>Я согласен с правилами обработки персональных данных</span>
+            </label>
+
+            <button className="send-button" type="submit">
+              Отправить →
+            </button>
+          </form>
         </div>
       </section>
 
