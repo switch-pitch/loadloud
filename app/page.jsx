@@ -456,14 +456,16 @@ export default function Page() {
               <textarea name="message" rows={4} />
             </label>
 
-            <label className="consent">
-              <input type="checkbox" name="consent" required />
-              <span>Я согласен с правилами обработки персональных данных</span>
-            </label>
+            <div className="form-actions">
+              <label className="consent">
+                <input type="checkbox" name="consent" required />
+                <span>Я согласен с правилами обработки персональных данных</span>
+              </label>
 
-            <button className="send-button" type="submit" disabled={formState.status === "submitting"}>
-              {formState.status === "submitting" ? "Отправка..." : "Отправить →"}
-            </button>
+              <button className="send-button" type="submit" disabled={formState.status === "submitting"}>
+                {formState.status === "submitting" ? "Отправка..." : "Отправить →"}
+              </button>
+            </div>
 
             {formState.message ? (
               <p className={`form-status ${formState.status === "error" ? "is-error" : "is-success"}`}>
