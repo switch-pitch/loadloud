@@ -122,7 +122,11 @@ export default function Page() {
       width = height * (4 / 3);
     }
 
-    const limited = Math.min(width, vw <= 640 && vh > vw ? vw : 640);
+    const maxFrameWidth =
+      vw <= 900
+        ? Math.min(640, Math.max(280, vw - 64))
+        : 640;
+    const limited = Math.min(width, maxFrameWidth);
     const scale = limited / 640;
     setFrameStyle({
       width: `${640 * scale}px`,
