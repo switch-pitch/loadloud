@@ -572,6 +572,11 @@ mux-player {
 }
 
 @media (max-width: 900px) {
+  .app {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
   .brand-block {
     top: 12px;
     left: 12px;
@@ -585,24 +590,80 @@ mux-player {
   }
 
   .frame {
-    margin-top: 92px;
+    margin-top: 64px;
+  }
+
+  .info-panel {
+    padding: 12px;
+    overflow-y: hidden;
+  }
+
+  .info-content {
+    padding-top: 46px;
+  }
+
+  .contact-intro {
+    font-size: 14px;
+    line-height: 1.2;
+    max-width: none;
+  }
+
+  .contact-title {
+    margin-top: 12px;
+    font-size: 30px;
+    line-height: 1.02;
+  }
+
+  .contact-form {
+    margin-top: 10px;
   }
 
   .form-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 10px;
+  }
+
+  .field {
+    gap: 4px;
   }
 
   .field span {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   .field input,
   .field textarea {
-    font-size: 18px;
+    font-size: 13px;
+    padding: 4px 0 6px;
+    line-height: 1.15;
+  }
+
+  .field-file,
+  .field-area {
+    margin-top: 8px;
+  }
+
+  .field-file input {
+    font-size: 12px;
+  }
+
+  .field-area textarea {
+    min-height: 54px;
   }
 
   .consent {
-    font-size: 14px;
+    margin-top: 8px;
+    font-size: 11px;
+    line-height: 1.2;
+  }
+
+  .send-button {
+    margin-top: 8px;
+    font-size: 16px;
+  }
+
+  .form-status {
+    margin-top: 6px;
+    font-size: 12px;
   }
 }
