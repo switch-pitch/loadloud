@@ -43,6 +43,53 @@ function formatTime(seconds) {
   return `${mins}:${secs}`;
 }
 
+function PlayIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="control-icon" aria-hidden="true">
+      <path d="M8 6 L19 12 L8 18 Z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function PauseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="control-icon" aria-hidden="true">
+      <rect x="7" y="6" width="3.5" height="12" fill="currentColor" />
+      <rect x="13.5" y="6" width="3.5" height="12" fill="currentColor" />
+    </svg>
+  );
+}
+
+function VolumeIcon({ muted }) {
+  return (
+    <svg viewBox="0 0 24 24" className="control-icon" aria-hidden="true">
+      <path d="M4 10V14H8L12 18V6L8 10H4Z" fill="currentColor" />
+      {muted ? (
+        <>
+          <path d="M16 9L20 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          <path d="M20 9L16 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </>
+      ) : (
+        <>
+          <path d="M15 9.5C16.2 10.3 17 11.6 17 13C17 14.4 16.2 15.7 15 16.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          <path d="M17.5 7C19.4 8.5 20.5 10.6 20.5 13C20.5 15.4 19.4 17.5 17.5 19" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        </>
+      )}
+    </svg>
+  );
+}
+
+function FullscreenIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="control-icon" aria-hidden="true">
+      <path d="M4 9V4H9" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M15 4H20V9" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M4 15V20H9" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M15 20H20V15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export default function Page() {
   const playerRef = useRef(null);
   const controlsRef = useRef(null);
@@ -387,23 +434,34 @@ export default function Page() {
         <div ref={controlsRef} className="controls ignore-hide-ui">
           <div className="controls-row">
             <div className="controls-left">
-              <button className="ui-button" type="button" onClick={togglePlay}>
-                {isPlaying ? "Pause" : "Play"}
+              <button
+                className="ui-button control-icon-button"
+                type="button"
+                onClick={togglePlay}
+                aria-label={isPlaying ? "Pause" : "Play"}
+              >
+                {isPlaying ? <PauseIcon /> : <PlayIcon />}
               </button>
-              <button className="ui-button ui-time" type="button" onClick={togglePlay}>
+              <span className="ui-time" aria-label="Playback time">
                 {formatTime(currentTime)}/{formatTime(duration)}
-              </button>
+              </span>
             </div>
             <div className="controls-right">
               <button
-                className={`ui-button ${isMuted ? "muted-line" : ""}`}
+                className="ui-button control-icon-button"
                 type="button"
                 onClick={() => setIsMuted((prev) => !prev)}
+                aria-label={isMuted ? "Unmute" : "Mute"}
               >
-                Mute
+                <VolumeIcon muted={isMuted} />
               </button>
-              <button className="ui-button" type="button" onClick={toggleFullscreen}>
-                {pseudoFullscreen ? "Exit" : "Fullscreen"}
+              <button
+                className="ui-button control-icon-button"
+                type="button"
+                onClick={toggleFullscreen}
+                aria-label={pseudoFullscreen ? "Exit fullscreen" : "Fullscreen"}
+              >
+                <FullscreenIcon />
               </button>
             </div>
           </div>

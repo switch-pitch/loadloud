@@ -54,18 +54,18 @@ a {
 
 .top-right {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 30px;
+  right: 30px;
   z-index: 80;
-  font-size: clamp(20px, 2.2vw, 30px);
+  font-size: clamp(16px, 1.76vw, 24px);
   line-height: 1.1;
   padding: 0;
   color: #111;
 }
 
 .app.info-open .top-right {
-  top: 12px;
-  right: 12px;
+  top: 30px;
+  right: 30px;
   bottom: auto;
   left: auto;
   transform: none;
@@ -186,8 +186,8 @@ mux-player {
   border: 0;
   background: transparent;
   color: #111;
-  width: 68px;
-  height: 96px;
+  width: 41px;
+  height: 58px;
   font-size: 0;
   line-height: 0;
   transform: translateY(-50%);
@@ -201,8 +201,8 @@ mux-player {
   content: "";
   position: absolute;
   top: 50%;
-  width: 64px;
-  height: 3px;
+  width: 38px;
+  height: 2px;
   background: currentColor;
   border-radius: 999px;
 }
@@ -313,7 +313,24 @@ mux-player {
 }
 
 .ui-time {
-  cursor: pointer;
+  font-size: clamp(14px, 1vw, 26px);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.control-icon-button {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.control-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .muted-line {
@@ -589,8 +606,8 @@ mux-player {
   }
 
   .top-right {
-    top: 12px;
-    right: 12px;
+    top: 30px;
+    right: 30px;
   }
 
   .frame {
@@ -599,16 +616,16 @@ mux-player {
 
   .side-arrow {
     display: block;
-    width: 44px;
-    height: 56px;
+    width: 26px;
+    height: 34px;
     top: calc(100% + 38px);
     transform: none;
   }
 
   .side-arrow::before,
   .side-arrow::after {
-    width: 40px;
-    height: 3px;
+    width: 24px;
+    height: 2px;
   }
 
   .side-arrow-left {
@@ -700,6 +717,15 @@ mux-player {
 
   .form-status {
     margin-top: 6px;
+    font-size: 12px;
+  }
+
+  .control-icon-button {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ui-time {
     font-size: 12px;
   }
 }
