@@ -186,8 +186,8 @@ mux-player {
   border: 0;
   background: transparent;
   color: #111;
-  width: 94px;
-  height: 132px;
+  width: 68px;
+  height: 96px;
   font-size: 0;
   line-height: 0;
   transform: translateY(-50%);
@@ -201,14 +201,14 @@ mux-player {
   content: "";
   position: absolute;
   top: 50%;
-  width: 88px;
-  height: 4px;
+  width: 64px;
+  height: 3px;
   background: currentColor;
   border-radius: 999px;
 }
 
 .side-arrow-left {
-  left: -108px;
+  left: -86px;
 }
 
 .side-arrow-left::before {
@@ -224,7 +224,7 @@ mux-player {
 }
 
 .side-arrow-right {
-  right: -108px;
+  right: -86px;
 }
 
 .side-arrow-right::before {
@@ -599,22 +599,28 @@ mux-player {
 
   .side-arrow {
     display: block;
-    width: 54px;
-    height: 84px;
+    width: 44px;
+    height: 56px;
+    top: calc(100% + 38px);
+    transform: none;
   }
 
   .side-arrow::before,
   .side-arrow::after {
-    width: 50px;
+    width: 40px;
     height: 3px;
   }
 
   .side-arrow-left {
-    left: -22px;
+    left: 0;
   }
 
   .side-arrow-right {
-    right: -22px;
+    right: 0;
+  }
+
+  .frame-caption {
+    top: calc(100% + 92px);
   }
 
   .info-panel {
