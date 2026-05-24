@@ -122,6 +122,7 @@ function FullscreenIcon() {
 }
 
 export default function SectionPage({ sectionKey = "studio" }) {
+  const isStudioPage = sectionKey === "studio";
   const playerRef = useRef(null);
   const controlsRef = useRef(null);
   const hideTimerRef = useRef(null);
@@ -416,107 +417,111 @@ export default function SectionPage({ sectionKey = "studio" }) {
 
   return (
     <div className={appClasses} data-mode={mode}>
-      <section className="brand-block ignore-hide-ui" aria-label="Brand description">
-        <h1 className="brand-title">
-          <span>loadloud </span>
-          <span className="brand-module-wrap">
-            <span className="brand-module-current">{currentSection.label}</span>
-            <span className="brand-module-menu" role="menu" aria-label="Разделы сайта">
-              {sectionMenuItems.map(([key, item]) => (
-                <Link key={key} href={item.href} className="brand-module-link" role="menuitem">
-                  {item.label}
-                </Link>
-              ))}
+      {isStudioPage ? (
+        <section className="brand-block ignore-hide-ui" aria-label="Brand description">
+          <h1 className="brand-title">
+            <span>loadloud </span>
+            <span className="brand-module-wrap">
+              <span className="brand-module-current">{currentSection.label}</span>
+              <span className="brand-module-menu" role="menu" aria-label="Разделы сайта">
+                {sectionMenuItems.map(([key, item]) => (
+                  <Link key={key} href={item.href} className="brand-module-link" role="menuitem">
+                    {item.label}
+                  </Link>
+                ))}
+              </span>
             </span>
-          </span>
-        </h1>
-      </section>
+          </h1>
+        </section>
+      ) : null}
 
       <button className="ui-button top-right ignore-hide-ui" type="button" onClick={toggleInfo}>
         {infoOpen ? "закрыть" : "нажать здесь"}
       </button>
 
-      <main className={frameClasses} style={frameStyle}>
-        <button
-          className="side-arrow side-arrow-left ignore-hide-ui"
-          type="button"
-          aria-label="Previous video"
-          onClick={() => changeVideo(-1)}
-        >
-          &lt;
-        </button>
-        <button
-          className="side-arrow side-arrow-right ignore-hide-ui"
-          type="button"
-          aria-label="Next video"
-          onClick={() => changeVideo(1)}
-        >
-          &gt;
-        </button>
+      {isStudioPage ? (
+        <main className={frameClasses} style={frameStyle}>
+          <button
+            className="side-arrow side-arrow-left ignore-hide-ui"
+            type="button"
+            aria-label="Previous video"
+            onClick={() => changeVideo(-1)}
+          >
+            &lt;
+          </button>
+          <button
+            className="side-arrow side-arrow-right ignore-hide-ui"
+            type="button"
+            aria-label="Next video"
+            onClick={() => changeVideo(1)}
+          >
+            &gt;
+          </button>
 
-        <button className="start-button ignore-hide-ui" type="button" hidden={!startVisible} onClick={togglePlay}>
-          Play
-        </button>
+          <button className="start-button ignore-hide-ui" type="button" hidden={!startVisible} onClick={togglePlay}>
+            Play
+          </button>
 
-        <mux-player
-          ref={playerRef}
-          className="player ignore-hide-ui"
-          playsinline=""
-          preload="metadata"
-          stream-type="on-demand"
-          playback-id={currentVideo.playbackId}
-          poster={`https://image.mux.com/${currentVideo.playbackId}/thumbnail.png?time=0`}
-          aria-label="loadloud video"
-          muted={isMuted}
-        />
+          <mux-player
+            ref={playerRef}
+            className="player ignore-hide-ui"
+            playsinline=""
+            preload="metadata"
+            stream-type="on-demand"
+            playback-id={currentVideo.playbackId}
+            poster={`https://image.mux.com/${currentVideo.playbackId}/thumbnail.png?time=0`}
+            aria-label="loadloud video"
+            muted={isMuted}
+          />
 
-        <div className="tap-layer ignore-hide-ui" aria-hidden="true" onClick={togglePlay} />
+          <div className="tap-layer ignore-hide-ui" aria-hidden="true" onClick={togglePlay} />
 
-        <div className="phone-overlay ignore-hide-ui" hidden={!phoneVisible}>
-          <a className="phone-link" href={`tel:${PHONE.replace(/\s+/g, "")}`} aria-label="Call phone number" />
-        </div>
+          <div className="phone-overlay ignore-hide-ui" hidden={!phoneVisible}>
+            <a className="phone-link" href={`tel:${PHONE.replace(/\s+/g, "")}`} aria-label="Call phone number" />
+          </div>
 
-        <div ref={controlsRef} className="controls ignore-hide-ui">
-          <div className="controls-row">
-            <div className="controls-left">
-              <button
-                className="ui-button control-icon-button"
-                type="button"
-                onClick={togglePlay}
-                aria-label={isPlaying ? "Pause" : "Play"}
-              >
-                {isPlaying ? <PauseIcon /> : <PlayIcon />}
-              </button>
-              <span className="ui-time" aria-label="Playback time">
-                {formatTime(currentTime)}/{formatTime(duration)}
-              </span>
-            </div>
-            <div className="controls-right">
-              <button
-                className="ui-button control-icon-button"
-                type="button"
-                onClick={() => setIsMuted((prev) => !prev)}
-                aria-label={isMuted ? "Unmute" : "Mute"}
-              >
-                <VolumeIcon muted={isMuted} />
-              </button>
-              <button
-                className="ui-button control-icon-button"
-                type="button"
-                onClick={toggleFullscreen}
-                aria-label={pseudoFullscreen ? "Exit fullscreen" : "Fullscreen"}
-              >
-                <FullscreenIcon />
-              </button>
+          <div ref={controlsRef} className="controls ignore-hide-ui">
+            <div className="controls-row">
+              <div className="controls-left">
+                <button
+                  className="ui-button control-icon-button"
+                  type="button"
+                  onClick={togglePlay}
+                  aria-label={isPlaying ? "Pause" : "Play"}
+                >
+                  {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                </button>
+                <span className="ui-time" aria-label="Playback time">
+                  {formatTime(currentTime)}/{formatTime(duration)}
+                </span>
+              </div>
+              <div className="controls-right">
+                <button
+                  className="ui-button control-icon-button"
+                  type="button"
+                  onClick={() => setIsMuted((prev) => !prev)}
+                  aria-label={isMuted ? "Unmute" : "Mute"}
+                >
+                  <VolumeIcon muted={isMuted} />
+                </button>
+                <button
+                  className="ui-button control-icon-button"
+                  type="button"
+                  onClick={toggleFullscreen}
+                  aria-label={pseudoFullscreen ? "Exit fullscreen" : "Fullscreen"}
+                >
+                  <FullscreenIcon />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <p className="frame-caption ignore-hide-ui">
-          <span className="caption-title">{currentVideo.title}</span>
-          {currentVideo.caption}
-        </p>
-      </main>
+          <p className="frame-caption ignore-hide-ui">
+            <span className="caption-title">{currentVideo.title}</span>
+            {currentVideo.caption}
+          </p>
+        </main>
+      ) : null}
 
       <section className="info-panel" hidden={!infoOpen}>
         <div className="info-content">
@@ -583,14 +588,16 @@ export default function SectionPage({ sectionKey = "studio" }) {
         </div>
       </section>
 
-      <button
-        className="theme-dot ignore-hide-ui"
-        type="button"
-        aria-label="Переключить тему"
-        onClick={() => setMode((prev) => (prev === "dark" ? "light" : "dark"))}
-      >
-        <span className="dot" />
-      </button>
+      {isStudioPage ? (
+        <button
+          className="theme-dot ignore-hide-ui"
+          type="button"
+          aria-label="Переключить тему"
+          onClick={() => setMode((prev) => (prev === "dark" ? "light" : "dark"))}
+        >
+          <span className="dot" />
+        </button>
+      ) : null}
     </div>
   );
 }

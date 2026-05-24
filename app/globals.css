@@ -178,6 +178,17 @@ mux-player {
   display: inline-flex;
   align-items: baseline;
   cursor: default;
+  padding-bottom: 14px;
+  margin-bottom: -14px;
+}
+
+.brand-module-wrap::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 14px;
 }
 
 .brand-module-current {
@@ -188,7 +199,7 @@ mux-player {
 
 .brand-module-menu {
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(100% + 2px);
   left: 0;
   display: flex;
   flex-direction: column;
