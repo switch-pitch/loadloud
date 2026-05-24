@@ -54,8 +54,8 @@ a {
 
 .top-right {
   position: absolute;
-  top: 25px;
-  right: 30px;
+  top: 40px;
+  right: 52px;
   z-index: 80;
   font-size: clamp(16px, 1.76vw, 24px);
   line-height: 1.1;
@@ -64,8 +64,8 @@ a {
 }
 
 .app.info-open .top-right {
-  top: 25px;
-  right: 30px;
+  top: 40px;
+  right: 52px;
   bottom: auto;
   left: auto;
   transform: none;
@@ -159,8 +159,8 @@ mux-player {
 
 .brand-block {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 34px;
+  left: 50px;
   z-index: 35;
   max-width: 560px;
   color: #111;
@@ -667,15 +667,15 @@ mux-player {
   }
 
   .brand-block {
-    top: 10px;
-    left: 10px;
-    right: 20px;
+    top: 28px;
+    left: 24px;
+    right: 24px;
     max-width: none;
   }
 
   .top-right {
-    top: 20px;
-    right: 30px;
+    top: 32px;
+    right: 24px;
   }
 
   .frame {
