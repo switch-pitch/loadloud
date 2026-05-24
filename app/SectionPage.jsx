@@ -146,7 +146,6 @@ export default function SectionPage({ sectionKey = "studio" }) {
   const [formState, setFormState] = useState({ status: "idle", message: "" });
   const [carouselDirection, setCarouselDirection] = useState("next");
   const [carouselPhase, setCarouselPhase] = useState("idle");
-  const [movingCardSrc, setMovingCardSrc] = useState("");
 
   const currentVideo = useMemo(() => VIDEO_ITEMS[currentVideoIndex], [currentVideoIndex]);
   const prevVideo = useMemo(
@@ -387,9 +386,7 @@ export default function SectionPage({ sectionKey = "studio" }) {
   const changeVideo = (step) => {
     if (carouselPhase !== "idle") return;
     const direction = step > 0 ? "next" : "prev";
-    const movingVideo = step > 0 ? nextVideo : prevVideo;
     setCarouselDirection(direction);
-    setMovingCardSrc(`https://image.mux.com/${movingVideo.playbackId}/thumbnail.png?time=0`);
     setCarouselPhase("out");
     clearCarouselTimer();
     carouselTimerRef.current = window.setTimeout(() => {
@@ -525,12 +522,6 @@ export default function SectionPage({ sectionKey = "studio" }) {
               className="carousel-peek-image"
             />
           </button>
-
-          {carouselPhase === "out" ? (
-            <div className={`moving-card moving-card-${carouselDirection}`} aria-hidden="true">
-              <img src={movingCardSrc} alt="" className="moving-card-image" />
-            </div>
-          ) : null}
 
           <div
             className={`main-stage ${carouselPhase !== "idle" ? `is-${carouselPhase}-${carouselDirection}` : ""}`}

@@ -337,12 +337,10 @@ mux-player::part(media) {
 
 .carousel-peek-right.is-out-next {
   animation: peek-right-out-next 620ms cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 32;
 }
 
 .carousel-peek-left.is-out-prev {
   animation: peek-left-out-prev 620ms cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 32;
 }
 
 .carousel-peek-right.is-out-prev {
@@ -391,38 +389,6 @@ mux-player::part(media) {
   filter: grayscale(1) brightness(0.78) contrast(1.06);
 }
 
-.moving-card {
-  position: absolute;
-  top: 50%;
-  z-index: 36;
-  width: 230px;
-  height: 280px;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.42);
-  animation-duration: 620ms;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  animation-fill-mode: forwards;
-  pointer-events: none;
-}
-
-.moving-card-left {
-  left: -168px;
-  animation-name: moving-card-left-to-center;
-}
-
-.moving-card-right {
-  right: -168px;
-  animation-name: moving-card-right-to-center;
-}
-
-.moving-card-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(1) brightness(0.82) contrast(1.06);
-}
-
 .carousel-peek:hover {
   filter: brightness(1.08);
 }
@@ -442,9 +408,9 @@ mux-player::part(media) {
     filter: blur(0);
   }
   100% {
-    transform: translateX(-110px) translateY(10px) scale(0.9);
-    opacity: 0.28;
-    filter: blur(7px);
+    transform: translateX(-34px) scale(0.95);
+    opacity: 0.46;
+    filter: blur(4px);
   }
 }
 
@@ -455,20 +421,20 @@ mux-player::part(media) {
     filter: blur(0);
   }
   100% {
-    transform: translateX(110px) translateY(10px) scale(0.9);
-    opacity: 0.28;
-    filter: blur(7px);
+    transform: translateX(34px) scale(0.95);
+    opacity: 0.46;
+    filter: blur(4px);
   }
 }
 
 @keyframes stage-in-next {
   0% {
-    transform: translateX(120px) translateY(12px) scale(0.88);
-    opacity: 0.3;
-    filter: blur(7px);
+    transform: translateX(38px) scale(0.95);
+    opacity: 0.5;
+    filter: blur(3px);
   }
   70% {
-    transform: translateX(-8px) translateY(-2px) scale(1.01);
+    transform: translateX(-4px) scale(1.005);
     opacity: 0.98;
     filter: blur(0);
   }
@@ -481,12 +447,12 @@ mux-player::part(media) {
 
 @keyframes stage-in-prev {
   0% {
-    transform: translateX(-120px) translateY(12px) scale(0.88);
-    opacity: 0.3;
-    filter: blur(7px);
+    transform: translateX(-38px) scale(0.95);
+    opacity: 0.5;
+    filter: blur(3px);
   }
   70% {
-    transform: translateX(8px) translateY(-2px) scale(1.01);
+    transform: translateX(4px) scale(1.005);
     opacity: 0.98;
     filter: blur(0);
   }
@@ -503,8 +469,8 @@ mux-player::part(media) {
     opacity: 1;
   }
   100% {
-    transform: translateY(-48%) rotateY(20deg) scale(0.8) translateX(-70px);
-    opacity: 0.18;
+    transform: translateY(-52%) rotateY(16deg) scale(0.86) translateX(-26px);
+    opacity: 0.36;
   }
 }
 
@@ -514,8 +480,8 @@ mux-player::part(media) {
     opacity: 1;
   }
   100% {
-    transform: translateY(-50%) rotateY(-4deg) scale(1.07) translateX(-84px);
-    opacity: 0.9;
+    transform: translateY(-52%) rotateY(-8deg) scale(0.98) translateX(-32px);
+    opacity: 0.72;
   }
 }
 
@@ -525,8 +491,8 @@ mux-player::part(media) {
     opacity: 1;
   }
   100% {
-    transform: translateY(-50%) rotateY(4deg) scale(1.07) translateX(84px);
-    opacity: 0.9;
+    transform: translateY(-52%) rotateY(8deg) scale(0.98) translateX(32px);
+    opacity: 0.72;
   }
 }
 
@@ -536,15 +502,15 @@ mux-player::part(media) {
     opacity: 1;
   }
   100% {
-    transform: translateY(-48%) rotateY(-20deg) scale(0.8) translateX(70px);
-    opacity: 0.18;
+    transform: translateY(-52%) rotateY(-16deg) scale(0.86) translateX(26px);
+    opacity: 0.36;
   }
 }
 
 @keyframes peek-left-in-next {
   0% {
-    transform: translateY(-48%) rotateY(20deg) scale(0.8) translateX(-70px);
-    opacity: 0.18;
+    transform: translateY(-52%) rotateY(16deg) scale(0.86) translateX(-26px);
+    opacity: 0.36;
   }
   100% {
     transform: translateY(-52%) rotateY(12deg) scale(0.92);
@@ -554,8 +520,8 @@ mux-player::part(media) {
 
 @keyframes peek-right-in-next {
   0% {
-    transform: translateY(-50%) rotateY(-4deg) scale(1.07) translateX(-84px);
-    opacity: 0.9;
+    transform: translateY(-52%) rotateY(-8deg) scale(0.98) translateX(-32px);
+    opacity: 0.72;
   }
   100% {
     transform: translateY(-52%) rotateY(-12deg) scale(0.92);
@@ -565,8 +531,8 @@ mux-player::part(media) {
 
 @keyframes peek-left-in-prev {
   0% {
-    transform: translateY(-50%) rotateY(4deg) scale(1.07) translateX(84px);
-    opacity: 0.9;
+    transform: translateY(-52%) rotateY(8deg) scale(0.98) translateX(32px);
+    opacity: 0.72;
   }
   100% {
     transform: translateY(-52%) rotateY(12deg) scale(0.92);
@@ -576,8 +542,8 @@ mux-player::part(media) {
 
 @keyframes peek-right-in-prev {
   0% {
-    transform: translateY(-48%) rotateY(-20deg) scale(0.8) translateX(70px);
-    opacity: 0.18;
+    transform: translateY(-52%) rotateY(-16deg) scale(0.86) translateX(26px);
+    opacity: 0.36;
   }
   100% {
     transform: translateY(-52%) rotateY(-12deg) scale(0.92);
@@ -594,28 +560,6 @@ mux-player::part(media) {
   }
   100% {
     opacity: 0;
-  }
-}
-
-@keyframes moving-card-right-to-center {
-  0% {
-    transform: translateY(-50%) rotateY(-12deg) scale(0.92);
-    opacity: 0.92;
-  }
-  100% {
-    transform: translate(-373px, -50%) rotateY(0deg) scale(2.78, 1.72);
-    opacity: 1;
-  }
-}
-
-@keyframes moving-card-left-to-center {
-  0% {
-    transform: translateY(-50%) rotateY(12deg) scale(0.92);
-    opacity: 0.92;
-  }
-  100% {
-    transform: translate(373px, -50%) rotateY(0deg) scale(2.78, 1.72);
-    opacity: 1;
   }
 }
 
@@ -1086,41 +1030,6 @@ mux-player::part(media) {
     transform: translateY(-50%) rotateY(-4deg) scale(0.98);
   }
 
-  .moving-card {
-    width: 52px;
-    height: 180px;
-    border-radius: 2px;
-  }
-
-  .moving-card-left {
-    left: -26px;
-  }
-
-  .moving-card-right {
-    right: -26px;
-  }
-
-  @keyframes moving-card-right-to-center {
-    0% {
-      transform: translateY(-50%) rotateY(-4deg) scale(0.98);
-      opacity: 0.92;
-    }
-    100% {
-      transform: translate(-226px, -50%) rotateY(0deg) scale(6.2, 2.67);
-      opacity: 1;
-    }
-  }
-
-  @keyframes moving-card-left-to-center {
-    0% {
-      transform: translateY(-50%) rotateY(4deg) scale(0.98);
-      opacity: 0.92;
-    }
-    100% {
-      transform: translate(226px, -50%) rotateY(0deg) scale(6.2, 2.67);
-      opacity: 1;
-    }
-  }
 
   .frame-caption {
     top: calc(100% + 46px);
