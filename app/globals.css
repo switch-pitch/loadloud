@@ -80,6 +80,14 @@ a {
   max-height: 100vh;
   overflow: visible;
   z-index: 20;
+  perspective: 1400px;
+}
+
+.main-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
 }
 
 .frame.landscape-mobile {
@@ -107,7 +115,7 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 24;
+  z-index: 34;
 }
 
 mux-player::part(center-play-button),
@@ -258,15 +266,16 @@ mux-player {
 .carousel-peek {
   position: absolute;
   top: 50%;
-  z-index: 16;
+  z-index: 12;
   width: 230px;
   height: 280px;
-  transform: translateY(-52%);
+  transform: translateY(-52%) scale(0.92);
   border: 0;
   padding: 0;
   background: rgba(10, 10, 10, 0.82);
   overflow: hidden;
   cursor: pointer;
+  transition: transform 0.22s ease, filter 0.22s ease;
 }
 
 .carousel-peek::after {
@@ -278,10 +287,12 @@ mux-player {
 
 .carousel-peek-left {
   left: -168px;
+  transform: translateY(-52%) rotateY(12deg) scale(0.92);
 }
 
 .carousel-peek-right {
   right: -168px;
+  transform: translateY(-52%) rotateY(-12deg) scale(0.92);
 }
 
 .carousel-peek-image {
@@ -290,6 +301,18 @@ mux-player {
   object-fit: cover;
   display: block;
   filter: grayscale(1) brightness(0.78);
+}
+
+.carousel-peek:hover {
+  filter: brightness(1.08);
+}
+
+.carousel-peek-left:hover {
+  transform: translateY(-52%) rotateY(10deg) scale(0.95);
+}
+
+.carousel-peek-right:hover {
+  transform: translateY(-52%) rotateY(-10deg) scale(0.95);
 }
 
 .side-arrow::before,
@@ -742,15 +765,17 @@ mux-player {
   .carousel-peek {
     width: 88px;
     height: 132px;
-    transform: translateY(-58%);
+    transform: translateY(-58%) scale(0.93);
   }
 
   .carousel-peek-left {
     left: -56px;
+    transform: translateY(-58%) rotateY(8deg) scale(0.93);
   }
 
   .carousel-peek-right {
     right: -56px;
+    transform: translateY(-58%) rotateY(-8deg) scale(0.93);
   }
 
   .frame-caption {
