@@ -131,13 +131,13 @@ export default function SectionPage({ sectionKey = "studio" }) {
   const [mode, setMode] = useState("dark");
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasEnded, setHasEnded] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [infoOpen, setInfoOpen] = useState(false);
   const [hideUI, setHideUI] = useState(false);
   const [pseudoFullscreen, setPseudoFullscreen] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [startVisible, setStartVisible] = useState(true);
+  const [startVisible, setStartVisible] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isLandscapeMobile, setIsLandscapeMobile] = useState(false);
   const [frameStyle, setFrameStyle] = useState({});
@@ -332,11 +332,12 @@ export default function SectionPage({ sectionKey = "studio" }) {
     if ("currentTime" in player) player.currentTime = 0;
     setIsPlaying(false);
     setHasEnded(false);
-    setStartVisible(true);
+    setStartVisible(false);
     setCurrentTime(0);
     setDuration(0);
     setHideUI(false);
     clearHideTimer();
+    safePlay(player);
   }, [clearHideTimer, currentVideo, safePause]);
 
   useEffect(() => {
@@ -394,7 +395,7 @@ export default function SectionPage({ sectionKey = "studio" }) {
     clearCarouselTimer();
     carouselTimerRef.current = window.setTimeout(() => {
       setCarouselAnimating(false);
-    }, 420);
+    }, 720);
     setCurrentVideoIndex((prev) => (prev + step + VIDEO_ITEMS.length) % VIDEO_ITEMS.length);
   };
 
@@ -501,16 +502,13 @@ export default function SectionPage({ sectionKey = "studio" }) {
           </button>
 
           <div className={`main-stage ${carouselAnimating ? `is-shifting-${carouselDirection}` : ""}`}>
-            <button className="start-button ignore-hide-ui" type="button" hidden={!startVisible} onClick={togglePlay}>
-              Play
-            </button>
-
             <mux-player
               ref={playerRef}
               className="player ignore-hide-ui"
               playsinline=""
               preload="metadata"
               stream-type="on-demand"
+              autoPlay=""
               playback-id={currentVideo.playbackId}
               poster={`https://image.mux.com/${currentVideo.playbackId}/thumbnail.png?time=0`}
               aria-label="loadloud video"

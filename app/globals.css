@@ -92,11 +92,11 @@ a {
 }
 
 .main-stage.is-shifting-next {
-  animation: stage-shift-next 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: stage-shift-next 720ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .main-stage.is-shifting-prev {
-  animation: stage-shift-prev 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: stage-shift-prev 720ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .frame.landscape-mobile {
@@ -293,19 +293,19 @@ mux-player {
 }
 
 .carousel-peek-left.is-shifting-next {
-  animation: peek-left-next 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: peek-left-next 720ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .carousel-peek-right.is-shifting-next {
-  animation: peek-right-next 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: peek-right-next 720ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .carousel-peek-left.is-shifting-prev {
-  animation: peek-left-prev 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: peek-left-prev 720ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .carousel-peek-right.is-shifting-prev {
-  animation: peek-right-prev 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: peek-right-prev 720ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .carousel-peek::after {
