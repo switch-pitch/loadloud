@@ -143,7 +143,7 @@ export default function SectionPage({ sectionKey = "studio" }) {
   const [frameStyle, setFrameStyle] = useState({});
   const [formState, setFormState] = useState({ status: "idle", message: "" });
   const [carouselDirection, setCarouselDirection] = useState("next");
-  const [carouselAnimating, setCarouselAnimating] = useState(false);
+  const [carouselPhase, setCarouselPhase] = useState("idle");
 
   const currentVideo = useMemo(() => VIDEO_ITEMS[currentVideoIndex], [currentVideoIndex]);
   const prevVideo = useMemo(
@@ -382,15 +382,18 @@ export default function SectionPage({ sectionKey = "studio" }) {
   };
 
   const changeVideo = (step) => {
-    if (carouselAnimating) return;
+    if (carouselPhase !== "idle") return;
     const direction = step > 0 ? "next" : "prev";
     setCarouselDirection(direction);
-    setCarouselAnimating(true);
+    setCarouselPhase("out");
     clearCarouselTimer();
     carouselTimerRef.current = window.setTimeout(() => {
-      setCarouselAnimating(false);
-    }, 1400);
-    setCurrentVideoIndex((prev) => (prev + step + VIDEO_ITEMS.length) % VIDEO_ITEMS.length);
+      setCurrentVideoIndex((prev) => (prev + step + VIDEO_ITEMS.length) % VIDEO_ITEMS.length);
+      setCarouselPhase("in");
+      carouselTimerRef.current = window.setTimeout(() => {
+        setCarouselPhase("idle");
+      }, 780);
+    }, 620);
   };
 
   const handleContactSubmit = async (event) => {
@@ -466,7 +469,7 @@ export default function SectionPage({ sectionKey = "studio" }) {
         <main className={frameClasses} style={frameStyle}>
           <button
             className={`carousel-peek carousel-peek-left ignore-hide-ui ${
-              carouselAnimating ? `is-shifting-${carouselDirection}` : ""
+              carouselPhase !== "idle" ? `is-${carouselPhase}-${carouselDirection}` : ""
             }`}
             type="button"
             aria-label="Previous video"
@@ -481,7 +484,7 @@ export default function SectionPage({ sectionKey = "studio" }) {
           </button>
           <button
             className={`carousel-peek carousel-peek-right ignore-hide-ui ${
-              carouselAnimating ? `is-shifting-${carouselDirection}` : ""
+              carouselPhase !== "idle" ? `is-${carouselPhase}-${carouselDirection}` : ""
             }`}
             type="button"
             aria-label="Next video"
@@ -495,7 +498,7 @@ export default function SectionPage({ sectionKey = "studio" }) {
             />
           </button>
 
-          <div className={`main-stage ${carouselAnimating ? `is-shifting-${carouselDirection}` : ""}`}>
+          <div className={`main-stage ${carouselPhase !== "idle" ? `is-${carouselPhase}-${carouselDirection}` : ""}`}>
             <mux-player
               ref={playerRef}
               className="player ignore-hide-ui"

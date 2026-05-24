@@ -101,17 +101,27 @@ a {
   opacity: 0;
 }
 
-.main-stage.is-shifting-next {
-  animation: stage-shift-next 1400ms cubic-bezier(0.22, 1, 0.36, 1);
+.main-stage.is-out-next {
+  animation: stage-out-next 620ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.main-stage.is-shifting-prev {
-  animation: stage-shift-prev 1400ms cubic-bezier(0.22, 1, 0.36, 1);
+.main-stage.is-out-prev {
+  animation: stage-out-prev 620ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.main-stage.is-shifting-next::after,
-.main-stage.is-shifting-prev::after {
-  animation: stage-bloom 1400ms cubic-bezier(0.22, 1, 0.36, 1);
+.main-stage.is-in-next {
+  animation: stage-in-next 780ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.main-stage.is-in-prev {
+  animation: stage-in-prev 780ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.main-stage.is-out-next::after,
+.main-stage.is-out-prev::after,
+.main-stage.is-in-next::after,
+.main-stage.is-in-prev::after {
+  animation: stage-bloom 900ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .frame.landscape-mobile {
@@ -313,25 +323,43 @@ mux-player::part(media) {
   transition: transform 0.35s ease, filter 0.35s ease;
 }
 
-.carousel-peek.is-shifting-next,
-.carousel-peek.is-shifting-prev {
+.carousel-peek.is-out-next,
+.carousel-peek.is-out-prev,
+.carousel-peek.is-in-next,
+.carousel-peek.is-in-prev {
   pointer-events: none;
 }
 
-.carousel-peek-left.is-shifting-next {
-  animation: peek-left-next 1400ms cubic-bezier(0.22, 1, 0.36, 1);
+.carousel-peek-left.is-out-next {
+  animation: peek-left-out-next 620ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.carousel-peek-right.is-shifting-next {
-  animation: peek-right-next 1400ms cubic-bezier(0.22, 1, 0.36, 1);
+.carousel-peek-right.is-out-next {
+  animation: peek-right-out-next 620ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.carousel-peek-left.is-shifting-prev {
-  animation: peek-left-prev 1400ms cubic-bezier(0.22, 1, 0.36, 1);
+.carousel-peek-left.is-out-prev {
+  animation: peek-left-out-prev 620ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.carousel-peek-right.is-shifting-prev {
-  animation: peek-right-prev 1400ms cubic-bezier(0.22, 1, 0.36, 1);
+.carousel-peek-right.is-out-prev {
+  animation: peek-right-out-prev 620ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-peek-left.is-in-next {
+  animation: peek-left-in-next 780ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.carousel-peek-right.is-in-next {
+  animation: peek-right-in-next 780ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.carousel-peek-left.is-in-prev {
+  animation: peek-left-in-prev 780ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.carousel-peek-right.is-in-prev {
+  animation: peek-right-in-prev 780ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .carousel-peek::after {
@@ -371,25 +399,33 @@ mux-player::part(media) {
   transform: translateY(-52%) rotateY(-10deg) scale(0.95);
 }
 
-@keyframes stage-shift-next {
+@keyframes stage-out-next {
   0% {
-    transform: translateX(24px) scale(0.975);
-    opacity: 0.66;
-    filter: blur(3px);
-  }
-  62% {
-    transform: translateX(-3px) scale(1.006);
-    opacity: 0.98;
-    filter: blur(0);
-  }
-  100% {
     transform: translateX(0) scale(1);
     opacity: 1;
     filter: blur(0);
   }
+  100% {
+    transform: translateX(-20px) scale(0.97);
+    opacity: 0.52;
+    filter: blur(5px);
+  }
 }
 
-@keyframes stage-shift-prev {
+@keyframes stage-out-prev {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    transform: translateX(20px) scale(0.97);
+    opacity: 0.52;
+    filter: blur(5px);
+  }
+}
+
+@keyframes stage-in-next {
   0% {
     transform: translateX(-24px) scale(0.975);
     opacity: 0.66;
@@ -407,7 +443,69 @@ mux-player::part(media) {
   }
 }
 
-@keyframes peek-left-next {
+@keyframes stage-in-prev {
+  0% {
+    transform: translateX(24px) scale(0.975);
+    opacity: 0.66;
+    filter: blur(3px);
+  }
+  62% {
+    transform: translateX(3px) scale(1.006);
+    opacity: 0.98;
+    filter: blur(0);
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes peek-left-out-next {
+  0% {
+    transform: translateY(-52%) rotateY(12deg) scale(0.92);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-52%) rotateY(18deg) scale(0.84) translateX(-26px);
+    opacity: 0.4;
+  }
+}
+
+@keyframes peek-right-out-next {
+  0% {
+    transform: translateY(-52%) rotateY(-12deg) scale(0.92);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-52%) rotateY(-6deg) scale(0.98) translateX(18px);
+    opacity: 0.62;
+  }
+}
+
+@keyframes peek-left-out-prev {
+  0% {
+    transform: translateY(-52%) rotateY(12deg) scale(0.92);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-52%) rotateY(6deg) scale(0.98) translateX(-18px);
+    opacity: 0.62;
+  }
+}
+
+@keyframes peek-right-out-prev {
+  0% {
+    transform: translateY(-52%) rotateY(-12deg) scale(0.92);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-52%) rotateY(-18deg) scale(0.84) translateX(26px);
+    opacity: 0.4;
+  }
+}
+
+@keyframes peek-left-in-next {
   0% {
     transform: translateY(-52%) rotateY(20deg) scale(0.82) translateX(-22px);
     opacity: 0.45;
@@ -418,7 +516,7 @@ mux-player::part(media) {
   }
 }
 
-@keyframes peek-right-next {
+@keyframes peek-right-in-next {
   0% {
     transform: translateY(-52%) rotateY(-4deg) scale(1) translateX(12px);
     opacity: 0.68;
@@ -429,7 +527,7 @@ mux-player::part(media) {
   }
 }
 
-@keyframes peek-left-prev {
+@keyframes peek-left-in-prev {
   0% {
     transform: translateY(-52%) rotateY(4deg) scale(1) translateX(-12px);
     opacity: 0.68;
@@ -440,7 +538,7 @@ mux-player::part(media) {
   }
 }
 
-@keyframes peek-right-prev {
+@keyframes peek-right-in-prev {
   0% {
     transform: translateY(-52%) rotateY(-20deg) scale(0.82) translateX(22px);
     opacity: 0.45;
