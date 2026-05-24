@@ -321,6 +321,7 @@ mux-player::part(media) {
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.35s ease, filter 0.35s ease;
+  border-radius: 4px;
 }
 
 .carousel-peek.is-out-next,
@@ -369,6 +370,7 @@ mux-player::part(media) {
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.62));
+  border-radius: inherit;
 }
 
 .carousel-peek-left {
@@ -387,6 +389,38 @@ mux-player::part(media) {
   object-fit: cover;
   display: block;
   filter: grayscale(1) brightness(0.78) contrast(1.06);
+}
+
+.moving-card {
+  position: absolute;
+  top: 50%;
+  z-index: 36;
+  width: 230px;
+  height: 280px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.42);
+  animation-duration: 620ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+.moving-card-left {
+  left: -168px;
+  animation-name: moving-card-left-to-center;
+}
+
+.moving-card-right {
+  right: -168px;
+  animation-name: moving-card-right-to-center;
+}
+
+.moving-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) brightness(0.82) contrast(1.06);
 }
 
 .carousel-peek:hover {
@@ -560,6 +594,28 @@ mux-player::part(media) {
   }
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes moving-card-right-to-center {
+  0% {
+    transform: translateY(-50%) rotateY(-12deg) scale(0.92);
+    opacity: 0.92;
+  }
+  100% {
+    transform: translate(-373px, -50%) rotateY(0deg) scale(2.78, 1.72);
+    opacity: 1;
+  }
+}
+
+@keyframes moving-card-left-to-center {
+  0% {
+    transform: translateY(-50%) rotateY(12deg) scale(0.92);
+    opacity: 0.92;
+  }
+  100% {
+    transform: translate(373px, -50%) rotateY(0deg) scale(2.78, 1.72);
+    opacity: 1;
   }
 }
 
@@ -1028,6 +1084,42 @@ mux-player::part(media) {
   .carousel-peek-right {
     right: -26px;
     transform: translateY(-50%) rotateY(-4deg) scale(0.98);
+  }
+
+  .moving-card {
+    width: 52px;
+    height: 180px;
+    border-radius: 2px;
+  }
+
+  .moving-card-left {
+    left: -26px;
+  }
+
+  .moving-card-right {
+    right: -26px;
+  }
+
+  @keyframes moving-card-right-to-center {
+    0% {
+      transform: translateY(-50%) rotateY(-4deg) scale(0.98);
+      opacity: 0.92;
+    }
+    100% {
+      transform: translate(-226px, -50%) rotateY(0deg) scale(6.2, 2.67);
+      opacity: 1;
+    }
+  }
+
+  @keyframes moving-card-left-to-center {
+    0% {
+      transform: translateY(-50%) rotateY(4deg) scale(0.98);
+      opacity: 0.92;
+    }
+    100% {
+      transform: translate(226px, -50%) rotateY(0deg) scale(6.2, 2.67);
+      opacity: 1;
+    }
   }
 
   .frame-caption {
