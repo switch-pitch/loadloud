@@ -193,12 +193,6 @@ export default function SectionPage({ sectionKey = "studio" }) {
     if (infoOpen) return;
     setHideUI(false);
     clearHideTimer();
-    if (!isPlaying) return;
-
-    hideTimerRef.current = window.setTimeout(() => {
-      const hovered = controlsRef.current ? controlsRef.current.matches(":hover") : false;
-      if (!hovered) setHideUI(true);
-    }, 2000);
   }, [clearHideTimer, infoOpen, isPlaying]);
 
   const updateLayout = useCallback(() => {
