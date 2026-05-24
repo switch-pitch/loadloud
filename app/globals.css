@@ -89,14 +89,29 @@ a {
   z-index: 30;
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
   transform: translateZ(0);
+  overflow: hidden;
+}
+
+.main-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 100% at 50% 20%, rgba(255, 255, 255, 0.08), transparent 60%);
+  opacity: 0;
 }
 
 .main-stage.is-shifting-next {
-  animation: stage-shift-next 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: stage-shift-next 980ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .main-stage.is-shifting-prev {
-  animation: stage-shift-prev 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: stage-shift-prev 980ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.main-stage.is-shifting-next::after,
+.main-stage.is-shifting-prev::after {
+  animation: stage-bloom 980ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .frame.landscape-mobile {
@@ -295,7 +310,7 @@ mux-player::part(media) {
   background: rgba(10, 10, 10, 0.82);
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.22s ease, filter 0.22s ease;
+  transition: transform 0.35s ease, filter 0.35s ease;
 }
 
 .carousel-peek.is-shifting-next,
@@ -304,26 +319,26 @@ mux-player::part(media) {
 }
 
 .carousel-peek-left.is-shifting-next {
-  animation: peek-left-next 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: peek-left-next 980ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .carousel-peek-right.is-shifting-next {
-  animation: peek-right-next 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: peek-right-next 980ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .carousel-peek-left.is-shifting-prev {
-  animation: peek-left-prev 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: peek-left-prev 980ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .carousel-peek-right.is-shifting-prev {
-  animation: peek-right-prev 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: peek-right-prev 980ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .carousel-peek::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.62));
 }
 
 .carousel-peek-left {
@@ -341,7 +356,7 @@ mux-player::part(media) {
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(1) brightness(0.78);
+  filter: grayscale(1) brightness(0.78) contrast(1.06);
 }
 
 .carousel-peek:hover {
@@ -358,30 +373,44 @@ mux-player::part(media) {
 
 @keyframes stage-shift-next {
   0% {
-    transform: translateX(18px) scale(0.985);
-    opacity: 0.72;
+    transform: translateX(24px) scale(0.975);
+    opacity: 0.66;
+    filter: blur(3px);
+  }
+  62% {
+    transform: translateX(-3px) scale(1.006);
+    opacity: 0.98;
+    filter: blur(0);
   }
   100% {
     transform: translateX(0) scale(1);
     opacity: 1;
+    filter: blur(0);
   }
 }
 
 @keyframes stage-shift-prev {
   0% {
-    transform: translateX(-18px) scale(0.985);
-    opacity: 0.72;
+    transform: translateX(-24px) scale(0.975);
+    opacity: 0.66;
+    filter: blur(3px);
+  }
+  62% {
+    transform: translateX(3px) scale(1.006);
+    opacity: 0.98;
+    filter: blur(0);
   }
   100% {
     transform: translateX(0) scale(1);
     opacity: 1;
+    filter: blur(0);
   }
 }
 
 @keyframes peek-left-next {
   0% {
-    transform: translateY(-52%) rotateY(16deg) scale(0.86);
-    opacity: 0.55;
+    transform: translateY(-52%) rotateY(20deg) scale(0.82) translateX(-22px);
+    opacity: 0.45;
   }
   100% {
     transform: translateY(-52%) rotateY(12deg) scale(0.92);
@@ -391,8 +420,8 @@ mux-player::part(media) {
 
 @keyframes peek-right-next {
   0% {
-    transform: translateY(-52%) rotateY(-8deg) scale(0.96);
-    opacity: 0.78;
+    transform: translateY(-52%) rotateY(-4deg) scale(1) translateX(12px);
+    opacity: 0.68;
   }
   100% {
     transform: translateY(-52%) rotateY(-12deg) scale(0.92);
@@ -402,8 +431,8 @@ mux-player::part(media) {
 
 @keyframes peek-left-prev {
   0% {
-    transform: translateY(-52%) rotateY(8deg) scale(0.96);
-    opacity: 0.78;
+    transform: translateY(-52%) rotateY(4deg) scale(1) translateX(-12px);
+    opacity: 0.68;
   }
   100% {
     transform: translateY(-52%) rotateY(12deg) scale(0.92);
@@ -413,12 +442,24 @@ mux-player::part(media) {
 
 @keyframes peek-right-prev {
   0% {
-    transform: translateY(-52%) rotateY(-16deg) scale(0.86);
-    opacity: 0.55;
+    transform: translateY(-52%) rotateY(-20deg) scale(0.82) translateX(22px);
+    opacity: 0.45;
   }
   100% {
     transform: translateY(-52%) rotateY(-12deg) scale(0.92);
     opacity: 1;
+  }
+}
+
+@keyframes stage-bloom {
+  0% {
+    opacity: 0.24;
+  }
+  45% {
+    opacity: 0.08;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
