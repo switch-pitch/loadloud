@@ -126,6 +126,7 @@ export default function SectionPage({ sectionKey = "studio" }) {
   const playerRef = useRef(null);
   const controlsRef = useRef(null);
   const hideTimerRef = useRef(null);
+  const carouselTimerRef = useRef(null);
 
   const [mode, setMode] = useState("dark");
   const [isPlaying, setIsPlaying] = useState(false);
@@ -141,6 +142,8 @@ export default function SectionPage({ sectionKey = "studio" }) {
   const [isLandscapeMobile, setIsLandscapeMobile] = useState(false);
   const [frameStyle, setFrameStyle] = useState({});
   const [formState, setFormState] = useState({ status: "idle", message: "" });
+  const [carouselDirection, setCarouselDirection] = useState("next");
+  const [carouselAnimating, setCarouselAnimating] = useState(false);
 
   const currentVideo = useMemo(() => VIDEO_ITEMS[currentVideoIndex], [currentVideoIndex]);
   const prevVideo = useMemo(
@@ -176,6 +179,13 @@ export default function SectionPage({ sectionKey = "studio" }) {
     if (hideTimerRef.current) {
       window.clearTimeout(hideTimerRef.current);
       hideTimerRef.current = null;
+    }
+  }, []);
+
+  const clearCarouselTimer = useCallback(() => {
+    if (carouselTimerRef.current) {
+      window.clearTimeout(carouselTimerRef.current);
+      carouselTimerRef.current = null;
     }
   }, []);
 
@@ -284,6 +294,10 @@ export default function SectionPage({ sectionKey = "studio" }) {
   }, [resetHideTimer]);
 
   useEffect(() => {
+    return clearCarouselTimer;
+  }, [clearCarouselTimer]);
+
+  useEffect(() => {
     const onFullScreenChange = () => {
       const player = playerRef.current;
       setPseudoFullscreen(Boolean(document.fullscreenElement && document.fullscreenElement === player));
@@ -373,6 +387,14 @@ export default function SectionPage({ sectionKey = "studio" }) {
   };
 
   const changeVideo = (step) => {
+    if (carouselAnimating) return;
+    const direction = step > 0 ? "next" : "prev";
+    setCarouselDirection(direction);
+    setCarouselAnimating(true);
+    clearCarouselTimer();
+    carouselTimerRef.current = window.setTimeout(() => {
+      setCarouselAnimating(false);
+    }, 420);
     setCurrentVideoIndex((prev) => (prev + step + VIDEO_ITEMS.length) % VIDEO_ITEMS.length);
   };
 
@@ -448,7 +470,9 @@ export default function SectionPage({ sectionKey = "studio" }) {
       {isStudioPage ? (
         <main className={frameClasses} style={frameStyle}>
           <button
-            className="carousel-peek carousel-peek-left ignore-hide-ui"
+            className={`carousel-peek carousel-peek-left ignore-hide-ui ${
+              carouselAnimating ? `is-shifting-${carouselDirection}` : ""
+            }`}
             type="button"
             aria-label="Previous video"
             onClick={() => changeVideo(-1)}
@@ -461,7 +485,9 @@ export default function SectionPage({ sectionKey = "studio" }) {
             />
           </button>
           <button
-            className="carousel-peek carousel-peek-right ignore-hide-ui"
+            className={`carousel-peek carousel-peek-right ignore-hide-ui ${
+              carouselAnimating ? `is-shifting-${carouselDirection}` : ""
+            }`}
             type="button"
             aria-label="Next video"
             onClick={() => changeVideo(1)}
@@ -474,7 +500,7 @@ export default function SectionPage({ sectionKey = "studio" }) {
             />
           </button>
 
-          <div className="main-stage">
+          <div className={`main-stage ${carouselAnimating ? `is-shifting-${carouselDirection}` : ""}`}>
             <button className="start-button ignore-hide-ui" type="button" hidden={!startVisible} onClick={togglePlay}>
               Play
             </button>
