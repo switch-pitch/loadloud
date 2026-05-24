@@ -417,23 +417,21 @@ export default function SectionPage({ sectionKey = "studio" }) {
 
   return (
     <div className={appClasses} data-mode={mode}>
-      {isStudioPage ? (
-        <section className="brand-block ignore-hide-ui" aria-label="Brand description">
-          <h1 className="brand-title">
-            <span>loadloud </span>
-            <span className="brand-module-wrap">
-              <span className="brand-module-current">{currentSection.label}</span>
-              <span className="brand-module-menu" role="menu" aria-label="Разделы сайта">
-                {sectionMenuItems.map(([key, item]) => (
-                  <Link key={key} href={item.href} className="brand-module-link" role="menuitem">
-                    {item.label}
-                  </Link>
-                ))}
-              </span>
+      <section className="brand-block ignore-hide-ui" aria-label="Brand description">
+        <h1 className="brand-title">
+          <span>loadloud </span>
+          <span className="brand-module-wrap">
+            <span className="brand-module-current">{currentSection.label}</span>
+            <span className="brand-module-menu" role="menu" aria-label="Разделы сайта">
+              {sectionMenuItems.map(([key, item]) => (
+                <Link key={key} href={item.href} className="brand-module-link" role="menuitem">
+                  {item.label}
+                </Link>
+              ))}
             </span>
-          </h1>
-        </section>
-      ) : null}
+          </span>
+        </h1>
+      </section>
 
       <button className="ui-button top-right ignore-hide-ui" type="button" onClick={toggleInfo}>
         {infoOpen ? "закрыть" : "нажать здесь"}
