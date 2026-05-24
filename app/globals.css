@@ -975,19 +975,22 @@ mux-player::part(media) {
   }
 
   .brand-block {
-    top: 28px;
+    top: 52px;
     left: 24px;
     right: 24px;
     max-width: none;
   }
 
   .top-right {
-    top: 32px;
+    top: 56px;
     right: 24px;
   }
 
   .frame {
-    margin-top: 64px;
+    margin-top: 140px;
+    width: min(560px, calc(100vw - 72px));
+    height: auto;
+    aspect-ratio: 4 / 3;
   }
 
   .side-arrow {
@@ -1009,23 +1012,33 @@ mux-player::part(media) {
   }
 
   .carousel-peek {
-    width: 88px;
-    height: 132px;
-    transform: translateY(-58%) scale(0.93);
+    width: 52px;
+    height: 180px;
+    transform: translateY(-50%) scale(0.98);
+    opacity: 0.88;
   }
 
   .carousel-peek-left {
-    left: -56px;
-    transform: translateY(-58%) rotateY(8deg) scale(0.93);
+    left: -26px;
+    transform: translateY(-50%) rotateY(4deg) scale(0.98);
   }
 
   .carousel-peek-right {
-    right: -56px;
-    transform: translateY(-58%) rotateY(-8deg) scale(0.93);
+    right: -26px;
+    transform: translateY(-50%) rotateY(-4deg) scale(0.98);
   }
 
   .frame-caption {
-    top: calc(100% + 92px);
+    top: calc(100% + 46px);
+    font-size: 13px;
+    line-height: 1.2;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .caption-title {
+    margin-bottom: 10px;
   }
 
   .info-panel {
@@ -1114,11 +1127,24 @@ mux-player::part(media) {
   }
 
   .control-icon-button {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 
   .ui-time {
     font-size: 12px;
+  }
+
+  .controls {
+    bottom: -34px;
+  }
+
+  .controls-row {
+    padding: 6px 0;
+  }
+
+  .controls-left,
+  .controls-right {
+    gap: 10px;
   }
 }

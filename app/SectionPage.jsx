@@ -127,6 +127,8 @@ export default function SectionPage({ sectionKey = "studio" }) {
   const controlsRef = useRef(null);
   const hideTimerRef = useRef(null);
   const carouselTimerRef = useRef(null);
+  const touchStartXRef = useRef(null);
+  const touchDeltaXRef = useRef(0);
 
   const [mode, setMode] = useState("dark");
   const [isPlaying, setIsPlaying] = useState(false);
@@ -396,6 +398,29 @@ export default function SectionPage({ sectionKey = "studio" }) {
     }, 620);
   };
 
+  const onCarouselTouchStart = (event) => {
+    if (!isStudioPage || !event.touches || event.touches.length !== 1) return;
+    touchStartXRef.current = event.touches[0].clientX;
+    touchDeltaXRef.current = 0;
+  };
+
+  const onCarouselTouchMove = (event) => {
+    if (touchStartXRef.current == null || !event.touches || event.touches.length !== 1) return;
+    touchDeltaXRef.current = event.touches[0].clientX - touchStartXRef.current;
+  };
+
+  const onCarouselTouchEnd = () => {
+    if (touchStartXRef.current == null) return;
+    const threshold = 42;
+    const delta = touchDeltaXRef.current;
+    touchStartXRef.current = null;
+    touchDeltaXRef.current = 0;
+
+    if (Math.abs(delta) < threshold) return;
+    if (delta < 0) changeVideo(1);
+    else changeVideo(-1);
+  };
+
   const handleContactSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -498,7 +523,13 @@ export default function SectionPage({ sectionKey = "studio" }) {
             />
           </button>
 
-          <div className={`main-stage ${carouselPhase !== "idle" ? `is-${carouselPhase}-${carouselDirection}` : ""}`}>
+          <div
+            className={`main-stage ${carouselPhase !== "idle" ? `is-${carouselPhase}-${carouselDirection}` : ""}`}
+            onTouchStart={onCarouselTouchStart}
+            onTouchMove={onCarouselTouchMove}
+            onTouchEnd={onCarouselTouchEnd}
+            onTouchCancel={onCarouselTouchEnd}
+          >
             <mux-player
               ref={playerRef}
               className="player ignore-hide-ui"
