@@ -143,6 +143,14 @@ export default function SectionPage({ sectionKey = "studio" }) {
   const [formState, setFormState] = useState({ status: "idle", message: "" });
 
   const currentVideo = useMemo(() => VIDEO_ITEMS[currentVideoIndex], [currentVideoIndex]);
+  const prevVideo = useMemo(
+    () => VIDEO_ITEMS[(currentVideoIndex - 1 + VIDEO_ITEMS.length) % VIDEO_ITEMS.length],
+    [currentVideoIndex]
+  );
+  const nextVideo = useMemo(
+    () => VIDEO_ITEMS[(currentVideoIndex + 1) % VIDEO_ITEMS.length],
+    [currentVideoIndex]
+  );
   const currentSection = SECTION_ITEMS[sectionKey] || SECTION_ITEMS.studio;
   const sectionMenuItems = Object.entries(SECTION_ITEMS).filter(([key]) => key !== sectionKey);
   const phoneVisible = currentTime >= 151 && !hasEnded;
@@ -440,20 +448,30 @@ export default function SectionPage({ sectionKey = "studio" }) {
       {isStudioPage ? (
         <main className={frameClasses} style={frameStyle}>
           <button
-            className="side-arrow side-arrow-left ignore-hide-ui"
+            className="carousel-peek carousel-peek-left ignore-hide-ui"
             type="button"
             aria-label="Previous video"
             onClick={() => changeVideo(-1)}
           >
-            &lt;
+            <img
+              src={`https://image.mux.com/${prevVideo.playbackId}/thumbnail.png?time=0`}
+              alt=""
+              aria-hidden="true"
+              className="carousel-peek-image"
+            />
           </button>
           <button
-            className="side-arrow side-arrow-right ignore-hide-ui"
+            className="carousel-peek carousel-peek-right ignore-hide-ui"
             type="button"
             aria-label="Next video"
             onClick={() => changeVideo(1)}
           >
-            &gt;
+            <img
+              src={`https://image.mux.com/${nextVideo.playbackId}/thumbnail.png?time=0`}
+              alt=""
+              aria-hidden="true"
+              className="carousel-peek-image"
+            />
           </button>
 
           <button className="start-button ignore-hide-ui" type="button" hidden={!startVisible} onClick={togglePlay}>

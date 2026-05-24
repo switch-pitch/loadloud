@@ -253,6 +253,43 @@ mux-player {
   user-select: none;
 }
 
+.carousel-peek {
+  position: absolute;
+  top: 50%;
+  z-index: 22;
+  width: 230px;
+  height: 280px;
+  transform: translateY(-52%);
+  border: 0;
+  padding: 0;
+  background: rgba(10, 10, 10, 0.75);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.carousel-peek::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.carousel-peek-left {
+  left: -250px;
+}
+
+.carousel-peek-right {
+  right: -250px;
+}
+
+.carousel-peek-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(1);
+}
+
 .side-arrow::before,
 .side-arrow::after {
   content: "";
@@ -683,11 +720,7 @@ mux-player {
   }
 
   .side-arrow {
-    display: block;
-    width: 26px;
-    height: 34px;
-    top: calc(100% + 38px);
-    transform: none;
+    display: none;
   }
 
   .side-arrow::before,
@@ -702,6 +735,20 @@ mux-player {
 
   .side-arrow-right {
     right: 0;
+  }
+
+  .carousel-peek {
+    width: 88px;
+    height: 132px;
+    transform: translateY(-58%);
+  }
+
+  .carousel-peek-left {
+    left: -96px;
+  }
+
+  .carousel-peek-right {
+    right: -96px;
   }
 
   .frame-caption {
