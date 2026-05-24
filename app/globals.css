@@ -154,6 +154,17 @@ mux-player {
   --dialog: none;
   --media-range-track-background: #2c2c2c;
   --media-range-progress-background: #ffffff;
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  background: #000;
+}
+
+mux-player::part(media) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .tap-layer {
