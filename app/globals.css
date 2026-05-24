@@ -89,7 +89,7 @@ a {
   z-index: 30;
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
   transform: translateZ(0);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .main-stage::after {
@@ -102,16 +102,16 @@ a {
 }
 
 .main-stage.is-shifting-next {
-  animation: stage-shift-next 980ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: stage-shift-next 1400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .main-stage.is-shifting-prev {
-  animation: stage-shift-prev 980ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: stage-shift-prev 1400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .main-stage.is-shifting-next::after,
 .main-stage.is-shifting-prev::after {
-  animation: stage-bloom 980ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: stage-bloom 1400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .frame.landscape-mobile {
@@ -319,19 +319,19 @@ mux-player::part(media) {
 }
 
 .carousel-peek-left.is-shifting-next {
-  animation: peek-left-next 980ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: peek-left-next 1400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .carousel-peek-right.is-shifting-next {
-  animation: peek-right-next 980ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: peek-right-next 1400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .carousel-peek-left.is-shifting-prev {
-  animation: peek-left-prev 980ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: peek-left-prev 1400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .carousel-peek-right.is-shifting-prev {
-  animation: peek-right-prev 980ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: peek-right-prev 1400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .carousel-peek::after {

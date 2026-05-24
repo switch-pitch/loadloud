@@ -389,7 +389,7 @@ export default function SectionPage({ sectionKey = "studio" }) {
     clearCarouselTimer();
     carouselTimerRef.current = window.setTimeout(() => {
       setCarouselAnimating(false);
-    }, 980);
+    }, 1400);
     setCurrentVideoIndex((prev) => (prev + step + VIDEO_ITEMS.length) % VIDEO_ITEMS.length);
   };
 
