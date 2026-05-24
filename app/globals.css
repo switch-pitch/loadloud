@@ -173,6 +173,52 @@ mux-player {
   line-height: 1.08;
 }
 
+.brand-module-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  cursor: default;
+}
+
+.brand-module-current {
+  display: inline-block;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.brand-module-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 10px;
+  min-width: 84px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(10, 10, 12, 0.95);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.brand-module-link {
+  white-space: nowrap;
+}
+
+.brand-module-wrap:hover .brand-module-current,
+.brand-module-wrap:focus-within .brand-module-current {
+  border-bottom-color: currentColor;
+}
+
+.brand-module-wrap:hover .brand-module-menu,
+.brand-module-wrap:focus-within .brand-module-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
 .brand-description {
   margin: 0;
   font-size: clamp(18px, 1.55vw, 23px);
@@ -366,6 +412,11 @@ mux-player {
 .app[data-mode="dark"] .side-arrow,
 .app[data-mode="dark"] .frame-caption {
   color: #d0d0d0;
+}
+
+.app[data-mode="dark"] .brand-module-menu {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(9, 10, 14, 0.96);
 }
 
 .info-content {
