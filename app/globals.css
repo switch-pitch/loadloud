@@ -102,19 +102,19 @@ a {
 }
 
 .main-stage.is-out-next {
-  animation: stage-out-next 760ms cubic-bezier(0.33, 1, 0.68, 1);
+  animation: stage-out-next 840ms cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .main-stage.is-out-prev {
-  animation: stage-out-prev 760ms cubic-bezier(0.33, 1, 0.68, 1);
+  animation: stage-out-prev 840ms cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .main-stage.is-in-next {
-  animation: stage-in-next 1100ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation: stage-in-next 1220ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .main-stage.is-in-prev {
-  animation: stage-in-prev 1100ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation: stage-in-prev 1220ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .main-stage.is-out-next::after,
@@ -332,35 +332,35 @@ mux-player::part(media) {
 }
 
 .carousel-peek-left.is-out-next {
-  animation: peek-left-out-next 760ms cubic-bezier(0.33, 1, 0.68, 1);
+  animation: peek-left-out-next 840ms cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .carousel-peek-right.is-out-next {
-  animation: peek-right-out-next 760ms cubic-bezier(0.33, 1, 0.68, 1);
+  animation: peek-right-out-next 840ms cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .carousel-peek-left.is-out-prev {
-  animation: peek-left-out-prev 760ms cubic-bezier(0.33, 1, 0.68, 1);
+  animation: peek-left-out-prev 840ms cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .carousel-peek-right.is-out-prev {
-  animation: peek-right-out-prev 760ms cubic-bezier(0.33, 1, 0.68, 1);
+  animation: peek-right-out-prev 840ms cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .carousel-peek-left.is-in-next {
-  animation: peek-left-in-next 1100ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation: peek-left-in-next 1220ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .carousel-peek-right.is-in-next {
-  animation: peek-right-in-next 1100ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation: peek-right-in-next 1220ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .carousel-peek-left.is-in-prev {
-  animation: peek-left-in-prev 1100ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation: peek-left-in-prev 1220ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .carousel-peek-right.is-in-prev {
-  animation: peek-right-in-prev 1100ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation: peek-right-in-prev 1220ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .carousel-peek::after {
@@ -408,9 +408,9 @@ mux-player::part(media) {
     filter: blur(0);
   }
   100% {
-    transform: translateX(-34px) scale(0.95);
-    opacity: 0.46;
-    filter: blur(4px);
+    transform: translateX(-26px) scale(0.962);
+    opacity: 0.58;
+    filter: blur(2.5px);
   }
 }
 
@@ -421,17 +421,17 @@ mux-player::part(media) {
     filter: blur(0);
   }
   100% {
-    transform: translateX(34px) scale(0.95);
-    opacity: 0.46;
-    filter: blur(4px);
+    transform: translateX(26px) scale(0.962);
+    opacity: 0.58;
+    filter: blur(2.5px);
   }
 }
 
 @keyframes stage-in-next {
   0% {
-    transform: translateX(24px) scale(0.97);
-    opacity: 0.68;
-    filter: blur(2px);
+    transform: translateX(26px) scale(0.962);
+    opacity: 0.58;
+    filter: blur(2.5px);
   }
   100% {
     transform: translateX(0) scale(1);
@@ -442,9 +442,9 @@ mux-player::part(media) {
 
 @keyframes stage-in-prev {
   0% {
-    transform: translateX(-24px) scale(0.97);
-    opacity: 0.68;
-    filter: blur(2px);
+    transform: translateX(-26px) scale(0.962);
+    opacity: 0.58;
+    filter: blur(2.5px);
   }
   100% {
     transform: translateX(0) scale(1);

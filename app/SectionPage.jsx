@@ -421,8 +421,8 @@ export default function SectionPage({ sectionKey = "studio" }) {
       setCarouselPhase("in");
       carouselTimerRef.current = window.setTimeout(() => {
         setCarouselPhase("idle");
-      }, 1100);
-    }, 760);
+      }, 1220);
+    }, 840);
   };
 
   const onCarouselTouchStart = (event) => {
