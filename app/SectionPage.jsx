@@ -172,7 +172,12 @@ export default function SectionPage({ sectionKey = "studio" }) {
 
   const safePlay = useCallback(
     (player) => {
-      if (canControlPlayer(player)) player.play();
+      if (canControlPlayer(player)) {
+        const result = player.play();
+        if (result && typeof result.catch === "function") {
+          result.catch(() => {});
+        }
+      }
     },
     [canControlPlayer]
   );
@@ -268,6 +273,11 @@ export default function SectionPage({ sectionKey = "studio" }) {
 
     const onLoadedMetadata = () => {
       setDuration(Number(player.duration) || 0);
+      safePlay(player);
+    };
+
+    const onCanPlay = () => {
+      safePlay(player);
     };
 
     const onTimeUpdate = () => {
@@ -278,6 +288,7 @@ export default function SectionPage({ sectionKey = "studio" }) {
     player.addEventListener("pause", onPause);
     player.addEventListener("ended", onEnded);
     player.addEventListener("loadedmetadata", onLoadedMetadata);
+    player.addEventListener("canplay", onCanPlay);
     player.addEventListener("timeupdate", onTimeUpdate);
 
     return () => {
@@ -285,9 +296,10 @@ export default function SectionPage({ sectionKey = "studio" }) {
       player.removeEventListener("pause", onPause);
       player.removeEventListener("ended", onEnded);
       player.removeEventListener("loadedmetadata", onLoadedMetadata);
+      player.removeEventListener("canplay", onCanPlay);
       player.removeEventListener("timeupdate", onTimeUpdate);
     };
-  }, [resetHideTimer]);
+  }, [resetHideTimer, safePlay]);
 
   useEffect(() => {
     return clearCarouselTimer;
@@ -334,7 +346,22 @@ export default function SectionPage({ sectionKey = "studio" }) {
     setHideUI(false);
     clearHideTimer();
     safePlay(player);
-  }, [clearHideTimer, currentVideo, safePause]);
+  }, [clearHideTimer, currentVideo, safePause, safePlay]);
+
+  useEffect(() => {
+    const player = playerRef.current;
+    if (!player) return;
+
+    const timers = [80, 260, 520].map((delay) =>
+      window.setTimeout(() => {
+        safePlay(player);
+      }, delay)
+    );
+
+    return () => {
+      timers.forEach((id) => window.clearTimeout(id));
+    };
+  }, [currentVideoIndex, safePlay]);
 
   useEffect(() => {
     if (!isPlaying || infoOpen) {
@@ -394,8 +421,8 @@ export default function SectionPage({ sectionKey = "studio" }) {
       setCarouselPhase("in");
       carouselTimerRef.current = window.setTimeout(() => {
         setCarouselPhase("idle");
-      }, 780);
-    }, 620);
+      }, 920);
+    }, 760);
   };
 
   const onCarouselTouchStart = (event) => {
