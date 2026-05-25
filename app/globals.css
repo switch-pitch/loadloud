@@ -110,11 +110,11 @@ a {
 }
 
 .main-stage.is-in-next {
-  animation: stage-in-next 920ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: stage-in-next 1100ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .main-stage.is-in-prev {
-  animation: stage-in-prev 920ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: stage-in-prev 1100ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .main-stage.is-out-next::after,
@@ -348,19 +348,19 @@ mux-player::part(media) {
 }
 
 .carousel-peek-left.is-in-next {
-  animation: peek-left-in-next 920ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: peek-left-in-next 1100ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .carousel-peek-right.is-in-next {
-  animation: peek-right-in-next 920ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: peek-right-in-next 1100ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .carousel-peek-left.is-in-prev {
-  animation: peek-left-in-prev 920ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: peek-left-in-prev 1100ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .carousel-peek-right.is-in-prev {
-  animation: peek-right-in-prev 920ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: peek-right-in-prev 1100ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .carousel-peek::after {
@@ -429,14 +429,9 @@ mux-player::part(media) {
 
 @keyframes stage-in-next {
   0% {
-    transform: translateX(38px) scale(0.95);
-    opacity: 0.5;
-    filter: blur(3px);
-  }
-  70% {
-    transform: translateX(-4px) scale(1.005);
-    opacity: 0.98;
-    filter: blur(0);
+    transform: translateX(24px) scale(0.97);
+    opacity: 0.68;
+    filter: blur(2px);
   }
   100% {
     transform: translateX(0) scale(1);
@@ -447,14 +442,9 @@ mux-player::part(media) {
 
 @keyframes stage-in-prev {
   0% {
-    transform: translateX(-38px) scale(0.95);
-    opacity: 0.5;
-    filter: blur(3px);
-  }
-  70% {
-    transform: translateX(4px) scale(1.005);
-    opacity: 0.98;
-    filter: blur(0);
+    transform: translateX(-24px) scale(0.97);
+    opacity: 0.68;
+    filter: blur(2px);
   }
   100% {
     transform: translateX(0) scale(1);
@@ -509,8 +499,8 @@ mux-player::part(media) {
 
 @keyframes peek-left-in-next {
   0% {
-    transform: translateY(-52%) rotateY(16deg) scale(0.86) translateX(-26px);
-    opacity: 0.36;
+    transform: translateY(-52%) rotateY(14deg) scale(0.88) translateX(-18px);
+    opacity: 0.5;
   }
   100% {
     transform: translateY(-52%) rotateY(12deg) scale(0.92);
@@ -520,8 +510,8 @@ mux-player::part(media) {
 
 @keyframes peek-right-in-next {
   0% {
-    transform: translateY(-52%) rotateY(-8deg) scale(0.98) translateX(-32px);
-    opacity: 0.72;
+    transform: translateY(-52%) rotateY(-9deg) scale(0.96) translateX(-20px);
+    opacity: 0.76;
   }
   100% {
     transform: translateY(-52%) rotateY(-12deg) scale(0.92);
@@ -531,8 +521,8 @@ mux-player::part(media) {
 
 @keyframes peek-left-in-prev {
   0% {
-    transform: translateY(-52%) rotateY(8deg) scale(0.98) translateX(32px);
-    opacity: 0.72;
+    transform: translateY(-52%) rotateY(9deg) scale(0.96) translateX(20px);
+    opacity: 0.76;
   }
   100% {
     transform: translateY(-52%) rotateY(12deg) scale(0.92);
@@ -542,8 +532,8 @@ mux-player::part(media) {
 
 @keyframes peek-right-in-prev {
   0% {
-    transform: translateY(-52%) rotateY(-16deg) scale(0.86) translateX(26px);
-    opacity: 0.36;
+    transform: translateY(-52%) rotateY(-14deg) scale(0.88) translateX(18px);
+    opacity: 0.5;
   }
   100% {
     transform: translateY(-52%) rotateY(-12deg) scale(0.92);

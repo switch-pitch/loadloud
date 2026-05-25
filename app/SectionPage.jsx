@@ -421,7 +421,7 @@ export default function SectionPage({ sectionKey = "studio" }) {
       setCarouselPhase("in");
       carouselTimerRef.current = window.setTimeout(() => {
         setCarouselPhase("idle");
-      }, 920);
+      }, 1100);
     }, 760);
   };
 
